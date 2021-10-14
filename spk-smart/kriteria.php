@@ -48,43 +48,7 @@ if($page=='form'){
 			<?php
 		}
 	}
-	if(isset($_POST['update'])){
-		$stmt = $db->prepare("select sum(bobot_kriteria) as bbtk from smart_kriteria");
-		$stmt->execute();
-		$row = $stmt->fetch();
-		if($_POST['bobot']<=100){
-			$bbt = $_GET['bobot'];
-			$bbt2 = $_POST['bobot']/100;
-			$bbtk = $row['bbtk']-$bbt;
-			$bbtk2 = $bbtk+$bbt2;
-			if($bbtk2<=1){
-				$id = $_POST['id'];
-				$nama = $_POST['nama'];
-				$bobot = $_POST['bobot']/100;
-				$stmt2 = $db->prepare("update smart_kriteria set nama_kriteria=?, bobot_kriteria=? where id_kriteria=?");
-				$stmt2->bindParam(1,$nama);
-				$stmt2->bindParam(2,$bobot);
-				$stmt2->bindParam(3,$id);
-				if($stmt2->execute()){
-					?>
-					<script type="text/javascript">location.href='kriteria.php'</script>
-					<?php
-				} else{
-					?>
-					<script type="text/javascript">alert('Gagal mengubah data')</script>
-					<?php
-				}
-			} else{
-				?>
-				<script type="text/javascript">alert('Bobot haruslah 100% jika dijumlahkan semua kriteria')</script>
-				<?php
-			}
-		} else{
-			?>
-				<script type="text/javascript">alert('Maaf nilai bobot maksimal 100')</script>
-			<?php
-		}
-	}
+	
 	?>
 	<form method="post">
 		<input type="hidden" name="id" value="<?php echo isset($_GET['id'])? $_GET['id'] : ''; ?>">
