@@ -1,5 +1,10 @@
 <?php
-session_start();
+// session_start();
+// session_destroy();
+// header('location: login.php');
+
+session_start()_;
 session_destroy();
-header('location: login.php');
+header('location: laporan.php');
 ?>
+
